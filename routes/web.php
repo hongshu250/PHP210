@@ -12,7 +12,13 @@
 */
 
 Route::get('/', function () {
-    return view('admin/index');
+    return view('home.welcome');
 });
 
-
+//后台
+Route::group([],function(){
+	//后台首页
+	Route::get('/admin','Admin\IndexController@index');
+	//后台用户管理
+	Route::resource('admin/user','Admin\UserController');
+});
