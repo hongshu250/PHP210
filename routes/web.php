@@ -15,9 +15,12 @@ Route::get('/', function () {
     return view('home.welcome');
 });
 
+//后台登录
 Route::any('admin/login','Admin\LoginController@login');
 Route::any('/admin/dologin','Admin\LoginController@dologin');
 Route::any('/admin/captcha','Admin\LoginController@captcha');
+
+Route::any('/admin/profile','Admin\LoginController@profile');
 
 //后台
 Route::group([],function(){

@@ -17,17 +17,24 @@
 
 </head>
 <body class="login-bg">
-    
+
+    <div id="mws-login-wrapper">
+         @if(session('error'))
+            <div class="mws-form-message error">
+                <li>{{session('error')}}</li>
+            </div>
+        @endif
+
     <div class="login">
         <div class="message">x-admin2.0-管理登录</div>
         <div id="darkbannerwrap"></div>
         
         <form method="post" class="layui-form" action="/admin/dologin">
-            <input name="username" placeholder="用户名"  type="text" lay-verify="required" class="layui-input" >
+            <input name="uname" placeholder="用户名"  type="text" lay-verify="required" class="layui-input" >
             <hr class="hr15">
-            <input name="password" lay-verify="required" placeholder="密码"  type="password" class="layui-input">
+            <input name="upass" lay-verify="required" placeholder="密码"  type="password" class="layui-input">
             <hr class="hr15">
-            <input name="username" placeholder="验证码"  type="text" style='width:210px'>
+            <input name="code" placeholder="验证码"  type="text" style='width:210px'>
             <img src="/admin/captcha" alt="" onclick='this.src = this.src+="?1"'>
             <hr class="hr15">
             {{csrf_field()}}
@@ -62,8 +69,8 @@
               document.getElementById('c2c98f0de5a04167a9e427d883690ff6').src=$url;
            })
 
-
-        
+        $('.mws-form-message').delay(1000).slideUp(2000);
+               
     </script>
 
 

@@ -19,23 +19,49 @@ class LoginController extends Controller
     }
 
 
+    /**
+     *  处理登录的方法
+     *
+     *  @return \Illuminate\Http\Response
+     */
     public function dologin(Request $request)
     {
+        //表单验证
 
- 		//验证码检测
-		echo session('code');
+        //判断用户名
+        $rs = DB::table('user')->where('uname',$request->uname)->first();
 
-		// if($code != $request->code){
-		//     return back()->with('error','验证码错误');
-		// }
+        //判断密码
+        //hash
+        if (!Hash::check($request->upass, $rs->upass)) {
+            
+            return back()->with('error','用户名或者密码错误');
+        }
 
-		// //存点信息  session
-		// session(['uid'=>$rs->id]);
-		// session(['uname'=>$rs->username]);
+        /*if (isset($rs)) {  
+            echo "This var is set set so I will print."; 
+            }*/
+        //加密解密
+        // if($request->upass != decrypt($rs->upass)){
 
-		// return redirect('/admin');
+        //     return back()->with('error','用户名或者密码错误');
+            
+        // }
+
+        //判断验证码
+        $code = session('code');
+        // dd($code);
+        if($code != $request->code){
+            return back()->with('error','验证码错误');
+        }
+
+        //存点信息  session
+        session(['uid'=>$rs->id]);
+        session(['uname'=>$rs->uname]);
+
+        return redirect('/admin');
+        
     }
-
      /**
      * 验证码生成
      * @param  [type] $tmp [description]
@@ -63,6 +89,43 @@ class LoginController extends Controller
         header("Cache-Control: no-cache, must-revalidate");
         header("Content-Type:image/jpeg");
         $builder->output();
+    }
+
+    /**
+     *  修改头像页面.
+     *
+     *  @return \Illuminate\Http\Response
+     */
+    public function profile()
+    {
+        return view('admin.profile',['title'=>'修改头像']);
+    }
+
+     /**
+     *  修改头像方法
+     *
+     *  @return \Illuminate\Http\Response
+     */
+    public function upload(Request $request)
+    {
+        //获取上传的文件对象
+        $file = $request->file('profile');
+        //判断文件是否有效
+        if($file->isValid()){
+            //上传文件的后缀名
+            $entension = $file->getClientOriginalExtension();
+            //修改名字
+            $newName = date('YmdHis').mt_rand(1000,9999).'.'.$entension;
+            //移动文件
+            $path = $file->move('./uploads',$newName);
+
+            $filepath = '/uploads/'.$newName;
+
+            $res['profile'] = $filepath;
+            DB::table('user')->where('id',session('uid'))->update($res);
+            //返回文件的路径
+            return  $filepath;
+        }
     }
 
 }

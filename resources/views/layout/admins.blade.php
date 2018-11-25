@@ -67,11 +67,11 @@
                 
                 <!-- Username and Functions -->
                 <div id="mws-user-functions">
-                    <div id="mws-username">
-                        Hello, jack&rose
+                    <div id="mws-uname">
+                        Hello, 
                     </div>
                     <ul>
-                    	<li><a href="#">修改头像</a></li>
+                    	<li><a href="/admin/profile">修改头像</a></li>
                         <li><a href="#">修改密码</a></li>
                         <li><a href="index.html">退出</a></li>
                     </ul>

@@ -4,12 +4,9 @@ namespace App\Http\Controllers\Admin;
 
 use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
-<<<<<<< HEAD
-=======
 use App\Http\Requests\UserRequest;
 use Hash;
 use App\Model\Admin\User;
->>>>>>> 2018-11-25 20:17 更新用户添加
 
 class UserController extends Controller
 {
@@ -21,11 +18,7 @@ class UserController extends Controller
     public function index()
     {
         //
-<<<<<<< HEAD
-=======
-
         echo '列表页面';
->>>>>>> 2018-11-25 20:17 更新用户添加
     }
 
     /**
@@ -36,10 +29,7 @@ class UserController extends Controller
     public function create()
     {
         //
-<<<<<<< HEAD
-=======
         return view('admin.user.add',['title'=>'添加管理员']);
->>>>>>> 2018-11-25 20:17 更新用户添加
     }
 
     /**
@@ -48,11 +38,7 @@ class UserController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-<<<<<<< HEAD
-    public function store(Request $request)
-    {
-        //
-=======
+  
     public function store(UserRequest $request)
     {
         //表单验证
@@ -95,7 +81,6 @@ class UserController extends Controller
 
             return back()->with('error','添加失败');
         }
->>>>>>> 2018-11-25 20:17 更新用户添加
     }
 
     /**
