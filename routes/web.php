@@ -15,6 +15,10 @@ Route::get('/', function () {
     return view('home.welcome');
 });
 
+Route::any('admin/login','Admin\LoginController@login');
+Route::any('/admin/dologin','Admin\LoginController@dologin');
+Route::any('/admin/captcha','Admin\LoginController@captcha');
+
 //后台
 Route::group([],function(){
 	//后台首页
