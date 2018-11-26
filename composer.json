@@ -8,13 +8,13 @@
         "php": ">=7.0.0",
         "fideloper/proxy": "~3.3",
         "laravel/framework": "5.5.*",
-<<<<<<< HEAD
-        "laravel/tinker": "~1.0"
-=======
-        "gregwar/captcha":"1.*",
+
+        "laravel/tinker": "~1.0",
+
+        "gregwar/captcha": "1.*",
         "laravel/tinker": "~1.0",
         "mews/captcha": "~2.0"
->>>>>>> 2018-11-25 20:17 更新用户添加
+
     },
     "require-dev": {
         "filp/whoops": "~2.0",
@@ -60,8 +60,4 @@
         "sort-packages": true,
         "optimize-autoloader": true
     }
-<<<<<<< HEAD
-=======
-
->>>>>>> 2018-11-25 20:17 更新用户添加
 }
