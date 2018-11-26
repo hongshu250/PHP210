@@ -30,7 +30,9 @@ class LoginController extends Controller
 
         //判断用户名
         $rs = DB::table('user')->where('uname',$request->uname)->first();
-
+        if (!$rs){
+            return back()->with('error','用户不存在');          
+        }
         //判断密码
         //hash
         if (!Hash::check($request->upass, $rs->upass)) {

@@ -108,7 +108,6 @@
             <!-- Main Navigation -->
             <div id="mws-navigation">
                 <ul>
-                    
                     <li>
                         <a href="#"><i class="icon-users"></i>用户管理</a>
                         <ul class='closed'>
@@ -116,8 +115,17 @@
                             <li><a href="/admin/user">用户列表</a></li>
                         </ul>
                     </li>
-                   
-                   
+                </ul>
+            </div>
+            <div id="mws-navigation">
+                <ul>
+                    <li>
+                        <a href="#"><i class="icon-users"></i>广告管理</a>
+                        <ul class='closed'>
+                            <li><a href="/admin/adv/create">广告添加</a></li>
+                            <li><a href="/">广告列表</a></li>
+                        </ul>
+                    </li>
                 </ul>
             </div>         
         </div>

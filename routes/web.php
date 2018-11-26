@@ -28,4 +28,7 @@ Route::group([],function(){
 	Route::get('/admin','Admin\IndexController@index');
 	//后台用户管理
 	Route::resource('admin/user','Admin\UserController');
+	//后台广告管理
+	Route::resource('admin/adv','Admin\AdvController');
+
 });
