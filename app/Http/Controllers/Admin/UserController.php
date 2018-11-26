@@ -15,10 +15,34 @@ class UserController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request $request)
     {
         //
-        echo '列表页面';
+       //多个条件的搜索
+        $res = User::orderBy('id','asc')
+            ->where(function($query) use($request){
+                //检测关键字
+                $uname = $request->input('uname');
+                $email = $request->input('email');
+                //如果用户名不为空
+                if(!empty($uname)) {
+                    $query->where('uname','like','%'.$uname.'%');
+                }
+                //如果邮箱不为空
+                if(!empty($email)) {
+                    $query->where('email','like','%'.$email.'%');
+                }
+            })
+        ->paginate($request->input('num', 10));
+
+            // dd($res);
+
+        return view('admin.user.index',[
+            'title'=>'用户的列表页面',
+            'res'=>$res,
+            'request'=>$request
+
+        ]);
     }
 
     /**

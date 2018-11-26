@@ -123,7 +123,7 @@
                         <a href="#"><i class="icon-users"></i>广告管理</a>
                         <ul class='closed'>
                             <li><a href="/admin/adv/create">广告添加</a></li>
-                            <li><a href="/">广告列表</a></li>
+                            <li><a href="/admin/adv">广告列表</a></li>
                         </ul>
                     </li>
                 </ul>
