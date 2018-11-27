@@ -11,9 +11,7 @@
 |
 */
 
-Route::get('/', function () {
-    return view('home.welcome');
-});
+
 
 //后台登录
 Route::any('admin/login','Admin\LoginController@login');
@@ -31,4 +29,10 @@ Route::group([],function(){
 	//后台广告管理
 	Route::resource('admin/adv','Admin\AdvController');
 
+});
+
+//前台
+Route::group([],function(){
+	//前台首页
+	Route::get('/','Home\IndexController@index');
 });
