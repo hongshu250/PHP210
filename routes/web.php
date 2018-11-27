@@ -35,4 +35,6 @@ Route::group([],function(){
 Route::group([],function(){
 	//前台首页
 	Route::get('/','Home\IndexController@index');
+	
+	
 });
