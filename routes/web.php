@@ -11,9 +11,7 @@
 |
 */
 
-Route::get('/', function () {
-    return view('home.welcome');
-});
+
 
 //后台登录
 Route::any('admin/login','Admin\LoginController@login');
@@ -40,3 +38,15 @@ Route::group([],function(){
 
 });
 
+<<<<<<< HEAD
+=======
+});
+
+//前台
+Route::group([],function(){
+	//前台首页
+	Route::get('/','Home\IndexController@index');
+	
+	
+});
+>>>>>>> 2989eee42a6c9add5b51c783af52bc769f29100d
