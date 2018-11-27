@@ -108,10 +108,17 @@ class LoginController extends Controller
      *
      *  @return \Illuminate\Http\Response
      */
+
     public function upload(Request $request)
     {
         //获取上传的文件对象
-        $file = $request->file('profile');
+        $file= $request->file('pic');
+        //dd($file);
+        if(!$file){
+
+
+           return back()->with('error','上传错误');
+        }
         //判断文件是否有效
         if($file->isValid()){
             //上传文件的后缀名
@@ -121,13 +128,77 @@ class LoginController extends Controller
             //移动文件
             $path = $file->move('./uploads',$newName);
 
+
             $filepath = '/uploads/'.$newName;
 
-            $res['profile'] = $filepath;
+
+            $res['pic'] = $filepath;
             DB::table('user')->where('id',session('uid'))->update($res);
             //返回文件的路径
             return  $filepath;
         }
+        
+    }
+
+    //退出
+    public function logout()
+    {
+        //清空session
+        session(['uid'=>'']);
+
+        return redirect('/admin/login');
+    }
+
+     public function changepass()
+    {
+        
+       return view('admin.changepass',['title'=>'修改密码']);
+    }
+
+
+    public function changeadmin(Request $request){
+        
+        $rs=DB::table('user')->where('id',session('uid'))->first();
+        if(!$request->upass){
+            return back()->with('error','请输入原密码');
+        }
+        if(!$request->newpass){
+            return back()->with('error','请输入新密码');
+        }
+        if(!$request->qpass){
+            return back()->with('error','请确认密码');
+        }
+       if (!Hash::check($request->upass, $rs->upass)) {
+        
+            return back()->with('error','原密码错误');
+        }
+        
+        if ($request->newupass != $request->qupass) {
+            
+            return back()->with('error','两次密码不一致');
+        }
+        $rs->upass =Hash::make($request->newupass);
+        //dd();
+        $res = ['upass'=>$rs->upass];
+        try{
+
+
+            $data=DB::table('user')->where('id',session('uid'))->update($res);
+            
+            if($data){
+                return redirect('/admin')->with('success','修改成功');
+            }
+
+
+        }catch(\Exception $e){
+
+
+            return back()->with('error','修改失败');
+        }
+
+
+
+
     }
 
 }

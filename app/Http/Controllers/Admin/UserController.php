@@ -53,7 +53,7 @@ class UserController extends Controller
     public function create()
     {
         //
-        return view('admin.user.add',['title'=>'添加管理员']);
+        return view('admin.user.add',['title'=>'添加用户']);
     }
 
     /**
@@ -66,7 +66,6 @@ class UserController extends Controller
     public function store(UserRequest $request)
     {
         //表单验证
-    
         $res = $request->except('_token','repass');
         if($request->hasFile('pic')){
             //自定义名字
@@ -127,6 +126,13 @@ class UserController extends Controller
     public function edit($id)
     {
         //
+        // 根据id获取数据
+        $res = User::find($id);
+
+        return view('admin.user.edit',[
+            'title'=>'用户的修改页面',
+            'res'=>$res
+        ]);
     }
 
     /**
@@ -138,7 +144,41 @@ class UserController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        //表单验证
+
+        //unlink
+
+        $res = $request->except('_token','_method');
+
+        if($request->hasFile('pic')){
+            //自定义名字
+            $name = rand(111,999).time();
+
+            //获取后缀
+            $suffix = $request->file('pic')->getClientOriginalExtension();
+
+            $request->file('pic')->move('./uploads',$name.'.'.$suffix);
+
+            $res['pic'] = '/uploads/'.$name.'.'.$suffix;
+
+        }
+
+        //数据表修改数据
+        try{
+
+            $data = User::where('id', $id)->update($res);
+            
+            if($data){
+                return redirect('/admin/user')->with('success','修改成功');
+            }
+
+        }catch(\Exception $e){
+
+            return back()->with('error','修改失败');
+        }
+
+
+
     }
 
     /**
@@ -150,5 +190,51 @@ class UserController extends Controller
     public function destroy($id)
     {
         //
+
+        //删除图片  头像
+        //unlink
+
+         try{
+
+            $res = User::destroy($id);
+            
+            if($res){
+                return redirect('/admin/user')->with('success','删除成功');
+            }
+
+        }catch(\Exception $e){
+
+            return back()->with('error','删除失败');
+        }
+
+
+    }
+
+    public function ajaxupdate(Request $request)
+    {
+        //判断空 
+
+        //判断用户名是否一样
+
+        //判断位数 6~12
+
+        $res = [];
+
+        $id = $request->ids;
+
+        $res['uname'] = $request->uv;
+
+        //修改数据
+        $data = User::where('id',$id)->update($res);
+
+        if($data){
+
+            echo 1;
+        } else {
+
+            echo 0;
+        }
+
+
     }
 }
