@@ -38,9 +38,7 @@ Route::group([],function(){
 
 });
 
-<<<<<<< HEAD
-=======
-});
+
 
 //前台
 Route::group([],function(){
@@ -49,4 +47,4 @@ Route::group([],function(){
 	
 	
 });
->>>>>>> 2989eee42a6c9add5b51c783af52bc769f29100d
+
