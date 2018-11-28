@@ -54,26 +54,30 @@
 			</div>
         </div>
         
-        <!-- User Tools (notifications, logout, profile, change password) -->
+        <!-- User Tools (notifications, logout, pic, change password) -->
         <div id="mws-user-tools" class="clearfix">
-            
+                  @php
+                        $user = DB::table('user')->where('id',session('uid'))->first();
+
+                    @endphp
+                     
             <!-- User Information and functions section -->
             <div id="mws-user-info" class="mws-inset">
             
             	<!-- User Photo -->
             	<div id="mws-user-photo">
-                	<img src="/admins/example/profile.jpg" alt="User Photo">
+                	<img src="{{$user->pic}}" alt="User Photo">
                 </div>
                 
                 <!-- Username and Functions -->
                 <div id="mws-user-functions">
                     <div id="mws-uname">
-                        Hello, 
+                        <span style='color:white'>Hello,{{$user->uname}}</span>
                     </div>
                     <ul>
                     	<li><a href="/admin/profile">修改头像</a></li>
-                        <li><a href="#">修改密码</a></li>
-                        <li><a href="index.html">退出</a></li>
+                        <li><a href="/admin/changepass">修改密码</a></li>
+                        <li><a href="/admin/logout">退出</a></li>
                     </ul>
                 </div>
             </div>
@@ -155,7 +159,7 @@
     </div>
 
     <!-- JavaScript Plugins -->
-    <script src="/admins/js/libs/jquery-1.8.3.min.js"></script>
+    <script src="/admins/js/libs/jquery-3.3.1.min.js"></script>
     <script src="/admins/js/libs/jquery.mousewheel.min.js"></script>
     <script src="/admins/js/libs/jquery.placeholder.min.js"></script>
     <script src="/admins/custom-plugins/fileinput.js"></script>

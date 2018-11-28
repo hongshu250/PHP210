@@ -22,7 +22,7 @@
         			<div class="mws-form-row">
         				<label class="mws-form-label">广告标题</label>
         				<div class="mws-form-item">
-        					<input type="text" class="small" name='phone' value="{{$res->gtitle}}">
+        					<input type="text" class="small" name='gtitle' value="{{$res->gtitle}}">
         				</div>
         			</div>
 					

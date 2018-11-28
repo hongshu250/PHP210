@@ -16,11 +16,11 @@ class AdvController extends Controller
                 //检测关键字
                 $gtitle = $request->input('gtitle');
                 $content = $request->input('content');
-                //如果用户名不为空
+                //如果描述不为空
                 if(!empty($gtitle)) {
                     $query->where('gtitle','like','%'.$gtitle.'%');
                 }
-                //如果邮箱不为空
+                //如果标题不为空
                 if(!empty($content)) {
                     $query->where('content','like','%'.$content.'%');
                 }
@@ -30,7 +30,7 @@ class AdvController extends Controller
             // dd($res);
 
         return view('admin.adv.index',[
-            'title'=>'用户的列表页面',
+            'title'=>'广告的列表页面',
             'res'=>$res,
             'request'=>$request
 
@@ -102,10 +102,12 @@ class AdvController extends Controller
         //
         // 根据id获取数据
         $res = Adv::find($id);
+        // dd($res);die;
 
         return view('admin.adv.edit',[
-            'title'=>'用户的修改页面',
+            'title'=>'广告的修改页面',
             'res'=>$res
+            
         ]);
     }
 
@@ -115,7 +117,7 @@ class AdvController extends Controller
 
     
         //广告验证
-        $res = $request->except('_token','pic','_method');
+        $res = $request->except('_token','_method');
 
         // dd($res);die;
         if($request->hasFile('gpic')){
