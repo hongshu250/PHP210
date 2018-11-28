@@ -35,6 +35,12 @@ Route::group([],function(){
 Route::group([],function(){
 	//前台首页
 	Route::get('/','Home\IndexController@index');
+	Route::get('/about','Home\IndexController@about');
+	Route::get('/portfolio','Home\IndexController@portfolio');
+	Route::get('/blog','Home\IndexController@blog');
+	Route::get('/shop','Home\IndexController@shop');
+	Route::get('/contact','Home\IndexController@contact');
+
 	
 	
 });
